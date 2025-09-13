@@ -1,6 +1,6 @@
 # CS2 server selector
 
-![Program image](/Screenshots/Servers.png)
+![Servers](/Screenshots/Servers.png)
 
 ## Functionality
 ### Server list
@@ -13,3 +13,5 @@ Click "Remove all rules" to revert all changes made by this program - you do not
 ### Firewall
 This program uses the builtin firewall to disable communication between your computer and the selected servers.
 In order to change the firewall policies, the program must be running under administrative privileges.
+
+![Firewall](/Screenshots/WF.png)
