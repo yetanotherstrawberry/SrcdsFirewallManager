@@ -10,15 +10,22 @@ using System.Threading.Tasks;
 
 namespace SrcdsFirewallManager.Services
 {
+    /// <summary>
+    /// A service for communication with the API.
+    /// </summary>
     internal sealed class ApiServerStore : IServerStore, IDisposable
     {
 
+        /// <summary>
+        /// Used for communication with the API.
+        /// </summary>
         private readonly HttpClient _http = new()
         {
             BaseAddress = new Uri("https://api.steampowered.com/"),
             Timeout = TimeSpan.FromSeconds(30),
         };
 
+        /// <inheritdoc/>
         public async Task<IDictionary<string, IEnumerable<Relay>>> GetServersAsync(CancellationToken cancellationToken = default)
         {
             return await _http.GetObjectAsync<Response>("ISteamApps/GetSDRConfig/v1/?appid=730", cancellationToken).ContinueWith(response =>
@@ -31,6 +38,7 @@ namespace SrcdsFirewallManager.Services
             });
         }
 
+        /// <inheritdoc/>
         public void Dispose()
         {
             _http.Dispose();

@@ -11,7 +11,7 @@ using System.Windows.Threading;
 namespace SrcdsFirewallManager
 {
     /// <summary>
-    /// Interaction logic for "App.xaml".
+    /// Interaction logic for the <see cref="Application"/>.
     /// </summary>
     internal sealed partial class App : Application
     {
@@ -22,10 +22,16 @@ namespace SrcdsFirewallManager
         private ServiceProvider? ServiceProvider { get; set; } = null;
 
         /// <summary>
-        /// 
+        /// Gets the <see cref="Application.Current"/> instance.
         /// </summary>
         private static App Self => (App)Current;
 
+        /// <summary>
+        /// Gets an instance of a viewmodel attached to the view.
+        /// </summary>
+        /// <param name="viewType"><see cref="Type"/> of the view.</param>
+        /// <returns>An instance of the viewmodel.</returns>
+        /// <exception cref="TypeAccessException">Could not create an instance.</exception>
         public static object? GetViewModel(Type viewType)
         {
             var viewModel = Self.ViewModelLocator.TryGetValue(viewType, out var instance) ? instance : null;
@@ -62,18 +68,18 @@ namespace SrcdsFirewallManager
         }
 
         /// <summary>
-        /// 
+        /// Registers views and viewmodels.
         /// </summary>
-        /// <param name="serviceCollection"></param>
+        /// <param name="serviceCollection">An instance to be used for registration.</param>
         private void RegisterViews(IServiceCollection serviceCollection)
         {
             RegisterView<MainWindow, MainWindowViewModel>(serviceCollection, singleton: true);
         }
 
         /// <summary>
-        /// 
+        /// Registers services and views.
         /// </summary>
-        /// <param name="serviceCollection"></param>
+        /// <param name="serviceCollection">An instance to be used for registration.</param>
         private void RegisterServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IServerStore, ApiServerStore>();
@@ -85,7 +91,7 @@ namespace SrcdsFirewallManager
         /// <inheritdoc/>
         protected override void OnStartup(StartupEventArgs startupArgs)
         {
-            DispatcherUnhandledException += ExceptionHandler;
+            DispatcherUnhandledException += ExceptionMessageHandler;
             base.OnStartup(startupArgs);
 
             var serviceCollection = new ServiceCollection();
@@ -96,11 +102,11 @@ namespace SrcdsFirewallManager
         }
 
         /// <summary>
-        /// 
+        /// Handles unhandled <see cref="Exception"/>s by showing a message.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="exceptionArgs"></param>
-        private void ExceptionHandler(object sender, DispatcherUnhandledExceptionEventArgs exceptionArgs)
+        /// <param name="sender">An <see cref="object"/> that sent the <see cref="Exception"/>.</param>
+        /// <param name="exceptionArgs"><see cref="EventArgs"/> of the <see cref="Exception"/>. <see cref="DispatcherUnhandledExceptionEventArgs.Exception"/> will be used to retrieve the <see cref="Exception.Message"/>.</param>
+        private void ExceptionMessageHandler(object sender, DispatcherUnhandledExceptionEventArgs exceptionArgs)
         {
             exceptionArgs.Handled = true;
             Dispatcher.CurrentDispatcher.Invoke(() =>
@@ -114,7 +120,7 @@ namespace SrcdsFirewallManager
         {
             base.OnExit(exitArgs);
             ServiceProvider?.Dispose();
-            DispatcherUnhandledException -= ExceptionHandler;
+            DispatcherUnhandledException -= ExceptionMessageHandler;
         }
 
     }

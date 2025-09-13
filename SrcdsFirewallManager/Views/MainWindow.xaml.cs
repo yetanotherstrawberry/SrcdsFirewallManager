@@ -1,11 +1,14 @@
 ﻿namespace SrcdsFirewallManager.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for the <see cref="MainWindow"/>.
     /// </summary>
-    internal partial class MainWindow : WindowBase
+    internal sealed partial class MainWindow : WindowBase
     {
 
+        /// <summary>
+        /// Initializes XAML.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();

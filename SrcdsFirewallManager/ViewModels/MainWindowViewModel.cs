@@ -10,7 +10,7 @@ using System.Windows.Threading;
 
 namespace SrcdsFirewallManager.ViewModels
 {
-    internal class MainWindowViewModel(IFirewallService firewallService, IServerStore serverStore) : ViewModelBase
+    internal sealed class MainWindowViewModel(IFirewallService firewallService, IServerStore serverStore) : ViewModelBase
     {
 
         /// <summary>
