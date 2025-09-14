@@ -113,6 +113,7 @@ namespace SrcdsFirewallManager
             {
                 MessageBox.Show(MainWindow, exceptionArgs.Exception.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
             });
+            if (MainWindow is null) Shutdown();
         }
 
         /// <inheritdoc/>
