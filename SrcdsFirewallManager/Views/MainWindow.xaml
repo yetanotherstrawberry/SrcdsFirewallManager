@@ -7,10 +7,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SrcdsFirewallManager.Views"
         xmlns:vm="clr-namespace:SrcdsFirewallManager.ViewModels"
+        xmlns:resx="clr-namespace:SrcdsFirewallManager.Properties"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:MainWindowViewModel, IsDesignTimeCreatable=False}"
-        Title="Server banning"
+        Title="{x:Static resx:Strings.MAIN_TITLE}"
         Height="450"
         Width="800">
     <Grid>
@@ -80,9 +81,16 @@
                     <Setter Property="Margin" Value="5,0,5,0" />
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Download" Command="{Binding DownloadCommand}" />
-            <Button Content="Apply" IsEnabled="{Binding Servers.Count}" Command="{Binding ApplyCommand}" />
-            <Button Content="Remove all rules" Command="{Binding RemoveCommand}" />
+            <Button
+                Content="{x:Static resx:Strings.DOWNLOAD_TEXT}"
+                Command="{Binding DownloadCommand}" />
+            <Button
+                Content="{x:Static resx:Strings.APPLY_TEXT}"
+                IsEnabled="{Binding Servers.Count}"
+                Command="{Binding ApplyCommand}" />
+            <Button
+                Content="{x:Static resx:Strings.RESET_RULES_TEXT}"
+                Command="{Binding RemoveCommand}" />
         </StackPanel>
     </Grid>
 </local:WindowBase>

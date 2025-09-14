@@ -4,6 +4,9 @@ using System.Windows.Input;
 
 namespace SrcdsFirewallManager.Views
 {
+    /// <summary>
+    /// Base for all <see cref="Window"/>s.
+    /// </summary>
     internal abstract class WindowBase : Window
     {
 
@@ -16,6 +19,7 @@ namespace SrcdsFirewallManager.Views
             }
         }
 
+        /// <inheritdoc/>
         protected override void OnKeyDown(KeyEventArgs e)
         {
             base.OnKeyDown(e);
