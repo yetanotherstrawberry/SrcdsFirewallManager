@@ -5,9 +5,13 @@ using System.Text.Json.Serialization;
 
 namespace SrcdsFirewallManager.Converters
 {
+    /// <summary>
+    /// A <see cref="JsonConverter{T}"/> for the <see cref="PortRange"/>.
+    /// </summary>
     internal sealed class PortRangeJsonConverter : JsonConverter<PortRange>
     {
 
+        /// <inheritdoc/>
         public override PortRange Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             var isArray = false;
@@ -43,6 +47,7 @@ namespace SrcdsFirewallManager.Converters
             throw new FormatException(nameof(reader.Read));
         }
 
+        /// <inheritdoc/>
         public override void Write(Utf8JsonWriter writer, PortRange value, JsonSerializerOptions options)
         {
             writer.WriteStartArray();

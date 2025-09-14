@@ -2,5 +2,8 @@
 
 namespace SrcdsFirewallManager.ViewModels
 {
-    internal class ViewModelBase : ObservableObject { }
+    /// <summary>
+    /// Handles <see langword="event"/>s for changing properties.
+    /// </summary>
+    internal abstract class ViewModelBase : ObservableObject { }
 }

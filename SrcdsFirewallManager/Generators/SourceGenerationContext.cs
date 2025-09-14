@@ -5,6 +5,9 @@ using System.Text.Json.Serialization;
 namespace SrcdsFirewallManager.Generators
 {
 
+    /// <summary>
+    /// Main <see cref="JsonSerializerContext"/>.
+    /// </summary>
     [JsonSourceGenerationOptions(
         Converters = new[] { typeof(PortRangeJsonConverter), typeof(IpAddressJsonConverter) },
         PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase)]

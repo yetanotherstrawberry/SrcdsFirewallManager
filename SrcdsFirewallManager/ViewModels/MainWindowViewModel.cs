@@ -10,6 +10,11 @@ using System.Windows.Threading;
 
 namespace SrcdsFirewallManager.ViewModels
 {
+    /// <summary>
+    /// Main viewmodel.
+    /// </summary>
+    /// <param name="firewallService">A service for managing the firewall.</param>
+    /// <param name="serverStore">A service for retrieving data.</param>
     internal sealed class MainWindowViewModel(IFirewallService firewallService, IServerStore serverStore) : ViewModelBase
     {
 
@@ -61,10 +66,7 @@ namespace SrcdsFirewallManager.ViewModels
                         var rules = _firewallService.GetBlockingRulesNames();
                         Dispatcher.CurrentDispatcher.Invoke(() =>
                         {
-                            Servers = [.. task.Result.Select(entity => new Selectable<KeyValuePair<string, IEnumerable<Relay>>>
-                            {
-                                Value = entity,
-                            })];
+                            Servers = [.. task.Result.Select(entity => new Selectable<KeyValuePair<string, IEnumerable<Relay>>>(entity))];
                             var servers = Servers.ToDictionary(server => server.Value.Key, server => server);
                             foreach (var rule in rules)
                             {
