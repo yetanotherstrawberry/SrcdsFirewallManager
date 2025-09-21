@@ -120,7 +120,7 @@ namespace SrcdsFirewallManager
             exceptionArgs.Handled = true;
             Dispatcher.CurrentDispatcher.Invoke(() =>
             {
-                MessageBox.Show(MainWindow, exceptionArgs.Exception.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                MessageBox.Show(MainWindow, exceptionArgs.Exception.Message, Strings.MAIN_TITLE, MessageBoxButton.OK, MessageBoxImage.Error);
             });
             if (MainWindow is null) Shutdown();
         }
