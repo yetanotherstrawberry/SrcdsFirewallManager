@@ -1,12 +1,10 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using SrcdsFirewallManager.Models.DTOs;
+﻿using SrcdsFirewallManager.Models.DTOs;
 using SrcdsFirewallManager.Models.Internal;
 using SrcdsFirewallManager.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using System.Windows.Threading;
 
 namespace SrcdsFirewallManager.ViewModels
 {
@@ -15,7 +13,7 @@ namespace SrcdsFirewallManager.ViewModels
     /// </summary>
     /// <param name="firewallService">A service for managing the firewall.</param>
     /// <param name="serverStore">A service for retrieving data.</param>
-    internal sealed class MainWindowViewModel(IFirewallService firewallService, IServerStore serverStore) : ViewModelBase
+    internal sealed class MainWindowViewModel(IFirewallService firewallService, IServerStore serverStore, IViewService viewService) : ViewModelBase
     {
 
         /// <summary>
@@ -27,6 +25,11 @@ namespace SrcdsFirewallManager.ViewModels
         /// Used to retrieve the data.
         /// </summary>
         private readonly IServerStore _serverStore = serverStore;
+
+        /// <summary>
+        /// Used for accessing the UI.
+        /// </summary>
+        private readonly IViewService _viewService = viewService;
 
         /// <summary>
         /// Field for <see cref="Servers"/>.
@@ -59,12 +62,12 @@ namespace SrcdsFirewallManager.ViewModels
         {
             get
             {
-                _downloadCommand ??= new AsyncRelayCommand(async () =>
+                _downloadCommand ??= CreateCommand(async () =>
                 {
                     await _serverStore.GetServersAsync().ContinueWith(task =>
                     {
                         var rules = _firewallService.GetBlockingRulesNames();
-                        Dispatcher.CurrentDispatcher.Invoke(() =>
+                        _viewService.Execute(() =>
                         {
                             Servers = [.. task.Result.Select(entity => new Selectable<KeyValuePair<string, IEnumerable<Relay>>>(entity))];
                             var servers = Servers.ToDictionary(server => server.Value.Key, server => server);
@@ -91,7 +94,7 @@ namespace SrcdsFirewallManager.ViewModels
         {
             get
             {
-                _deleteCommand ??= new RelayCommand(() =>
+                _deleteCommand ??= CreateCommand(() =>
                 {
                     _firewallService.ResetAllRules();
                     DownloadCommand.Execute(null);
@@ -112,9 +115,11 @@ namespace SrcdsFirewallManager.ViewModels
         {
             get
             {
-                _applyCommand ??= new RelayCommand(() =>
+                _applyCommand ??= CreateCommand(() =>
                 {
-                    foreach (var server in Selection)
+                    var selection = Selection.ToList();
+                    _firewallService.ResetAllRules();
+                    foreach (var server in selection)
                     {
                         _firewallService.AddRule(server.Key, server.Value.Select(relay => relay.Address), new Tuple<ushort, ushort>(server.Value.Min(relay => relay.Range.Start), server.Value.Max(relay => relay.Range.End)), udp: true);
                     }

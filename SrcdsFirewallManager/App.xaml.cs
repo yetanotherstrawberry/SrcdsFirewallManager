@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SrcdsFirewallManager.Properties;
 using SrcdsFirewallManager.Services;
 using SrcdsFirewallManager.Services.Interfaces;
 using SrcdsFirewallManager.ViewModels;
@@ -84,6 +85,14 @@ namespace SrcdsFirewallManager
         {
             serviceCollection.AddScoped<IServerStore, ApiServerStore>();
             serviceCollection.AddScoped<IFirewallService, ComNetFwLibFirewallService>();
+
+            serviceCollection.AddSingleton<IViewService, ActionsViewService>(serviceProvider =>
+            {
+                return new ActionsViewService(
+                    message => MessageBox.Show(message, Strings.MAIN_TITLE, MessageBoxButton.OK, MessageBoxImage.Asterisk),
+                    errorMessage => MessageBox.Show(errorMessage, Strings.MAIN_TITLE, MessageBoxButton.OK, MessageBoxImage.Error),
+                    Self.Dispatcher.Invoke);
+            });
 
             RegisterViews(serviceCollection);
         }
