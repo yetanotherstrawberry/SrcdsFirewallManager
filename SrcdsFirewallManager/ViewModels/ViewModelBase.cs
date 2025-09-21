@@ -48,18 +48,18 @@ namespace SrcdsFirewallManager.ViewModels
         }
 
         /// <summary>
-        /// Creates an <see cref="ICommand"/> for given <paramref name="action"/>.
+        /// Creates an <see cref="ICommand"/> for given <paramref name="function"/>.
         /// </summary>
-        /// <param name="action">The <see cref="Task"/> to execute.</param>
+        /// <param name="function">The <see cref="Task"/> to execute.</param>
         /// <returns>A <see langword="new"/> <see cref="ICommand"/>.</returns>
-        protected ICommand CreateCommand(Func<Task> action)
+        protected ICommand CreateCommand(Func<Task> function)
         {
             return new AsyncRelayCommand(async () =>
             {
                 try
                 {
                     IsFree = false;
-                    await action();
+                    await function();
                 }
                 finally
                 {

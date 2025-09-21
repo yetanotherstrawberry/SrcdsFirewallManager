@@ -1,4 +1,4 @@
-# CS2 server selector
+# CS2 Server Selector
 
 ![Servers](/Screenshots/Servers.png)
 

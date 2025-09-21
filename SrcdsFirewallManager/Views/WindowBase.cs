@@ -15,16 +15,16 @@ namespace SrcdsFirewallManager.Views
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
                 var viewModel = App.GetViewModel(GetType());
-                if (viewModel != null) DataContext = viewModel;
+                if (viewModel is not null) DataContext = viewModel;
             }
         }
 
         /// <inheritdoc/>
-        protected override void OnKeyDown(KeyEventArgs e)
+        protected override void OnKeyDown(KeyEventArgs keyEventArgs)
         {
-            base.OnKeyDown(e);
+            base.OnKeyDown(keyEventArgs);
 
-            switch (e.Key)
+            switch (keyEventArgs.Key)
             {
                 case Key.Escape:
                     Close();

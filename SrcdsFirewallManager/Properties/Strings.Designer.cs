@@ -61,7 +61,7 @@ namespace SrcdsFirewallManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply.
+        ///   Looks up a localized string similar to Block selected.
         /// </summary>
         public static string APPLY_TEXT {
             get {
