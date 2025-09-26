@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace SrcdsFirewallManager.Models.DTOs
 {
-    internal sealed class Relay
+    internal class Relay
     {
 
         [JsonPropertyName("ipv4")]

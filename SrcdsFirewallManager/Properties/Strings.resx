@@ -129,4 +129,7 @@
   <data name="MAIN_TITLE" xml:space="preserve">
     <value>Server banning</value>
   </data>
+  <data name="FW_DISABLED" xml:space="preserve">
+    <value>The built-in firewall is disabled. Enable it for the selection to take effect.</value>
+  </data>
 </root>

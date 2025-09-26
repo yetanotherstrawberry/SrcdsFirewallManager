@@ -79,6 +79,15 @@ namespace SrcdsFirewallManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The built-in firewall is disabled. Enable it for the selection to take effect..
+        /// </summary>
+        public static string FW_DISABLED {
+            get {
+                return ResourceManager.GetString("FW_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Server banning.
         /// </summary>
         public static string MAIN_TITLE {

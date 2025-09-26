@@ -12,7 +12,7 @@ namespace SrcdsFirewallManager.Services
     /// A server for controlling the firewall using <see cref="NetFwTypeLib"/>.
     /// </summary>
     [RequiresUnreferencedCode(nameof(NetFwTypeLib))]
-    internal sealed class ComNetFwLibFirewallService : IFirewallService
+    internal class ComNetFwLibFirewallService : IFirewallService
     {
 
         /// <inheritdoc/>

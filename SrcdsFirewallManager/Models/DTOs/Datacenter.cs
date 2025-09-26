@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace SrcdsFirewallManager.Models.DTOs
 {
-    internal sealed class Datacenter
+    internal class Datacenter
     {
 
         [JsonPropertyName("desc")]

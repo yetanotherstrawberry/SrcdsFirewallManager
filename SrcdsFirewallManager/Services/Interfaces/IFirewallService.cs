@@ -5,7 +5,7 @@ using System.Net;
 namespace SrcdsFirewallManager.Services.Interfaces
 {
     /// <summary>
-    /// A service for managing the builtin firewall.
+    /// A service for managing the built-in firewall.
     /// </summary>
     internal interface IFirewallService
     {
@@ -22,7 +22,7 @@ namespace SrcdsFirewallManager.Services.Interfaces
         public void AddRule(string name, IEnumerable<IPAddress> addresses, Tuple<ushort, ushort> range, bool block = true, bool? udp = null, bool outbound = true);
 
         /// <summary>
-        /// Returns the status of builtin firewall.
+        /// Returns the status of built-in firewall.
         /// </summary>
         /// <returns>Returns <see langword="true"/> if the firewall is enabled; otherwise <see langword="false"/>.</returns>
         public bool CheckStatus();

@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace SrcdsFirewallManager.Models.DTOs
 {
-    internal sealed class Response
+    internal class Response
     {
 
         [JsonPropertyName("pops")]

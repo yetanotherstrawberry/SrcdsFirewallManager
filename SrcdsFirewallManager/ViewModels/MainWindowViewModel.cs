@@ -1,5 +1,6 @@
 ﻿using SrcdsFirewallManager.Models.DTOs;
 using SrcdsFirewallManager.Models.Internal;
+using SrcdsFirewallManager.Properties;
 using SrcdsFirewallManager.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -66,6 +67,7 @@ namespace SrcdsFirewallManager.ViewModels
                 {
                     await _serverStore.GetServersAsync().ContinueWith(task =>
                     {
+                        if (!_firewallService.CheckStatus()) _viewService.ShowMessage(Strings.FW_DISABLED);
                         var rules = _firewallService.GetBlockingRulesNames();
                         _viewService.Execute(() =>
                         {
