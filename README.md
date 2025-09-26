@@ -18,4 +18,5 @@ In order to change the firewall policies, the program must be running under admi
 
 ### Disabled firewall detection
 You will be notified if the built-in firewall is disabled.
+
 ![Disabled](/Screenshots/Disabled.png)
